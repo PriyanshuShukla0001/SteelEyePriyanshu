@@ -1,0 +1,17 @@
+The code defines a React component called List that renders a list of items with selectable items.
+The List component accepts an array of items as its input, each item having a text property.
+
+The List component has two child components: SingleListItem and WrappedSingleListItem.
+The SingleListItem component renders a single item in the list and is memoized for performance optimization.
+The WrappedSingleListItem component is not exported and is used by the SingleListItem component to render a
+list item with a text value, an index, a boolean value that indicates whether the item is selected or not,
+and an onClick handler.
+
+When a list item is clicked, the handleClick function is called, which updates the selectedIndex state value
+with the index of the clicked item. The selected item is highlighted with a green background color.
+
+The List component uses the useState hook to manage the state of the selectedIndex variable, and the useEffect
+hook to set the selectedIndex to null whenever the items prop changes. The List component maps over the items
+array to render each SingleListItem component with the corresponding text, index, isSelected, and onClickHandler
+props. Finally, the List component exports a memoized version of the WrappedListComponent to improve performance
+by preventing unnecessary re-renders.

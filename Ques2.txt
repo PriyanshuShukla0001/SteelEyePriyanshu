@@ -1,0 +1,36 @@
+The setSelectedIndex variable in the WrappedListComponent should only hold the useState setter function,
+but instead, it's initialized with the setter function and an undefined value. It should be initialized
+with the following line instead:
+
+const [selectedIndex, setSelectedIndex] = useState(null);
+
+
+The items prop in the WrappedListComponent should be required, but the defaultProps sets it to null.
+It's better to initialize it as an empty array:
+
+WrappedListComponent.defaultProps = {
+  items: [],
+};
+
+
+
+The PropTypes for the items prop in the WrappedListComponent are not defined correctly.
+Instead of array(PropTypes.shapeOf(...)), it should be PropTypes.arrayOf(PropTypes.shape(...)):
+
+WrappedListComponent.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};
+
+
+
+In the WrappedSingleListItem, the onClick event handler should be a function that calls the
+onClickHandler with the index parameter instead of directly invoking the onClickHandler:
+
+<li
+  style={{ backgroundColor: isSelected ? 'green' : 'red'}}
+  onClick={() => onClickHandler(index)}
+>
